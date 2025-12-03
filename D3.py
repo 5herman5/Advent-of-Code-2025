@@ -3,15 +3,14 @@ s = f.read()
 
 l = [line for line in s.split("\n")]
 
-def get_max(row, n):
-    if n == 0:
-        return max(row)
-    section = row[:-n]
-    val = max(section)
-    cut = min(i for i, a in enumerate(section) if a == val)
-    return get_max(row[cut+1:], n - 1) + val
+for part in (2, 12):
+    t = 0
+    
+    for row in l:
+        ns = [-1]
+        for i in list(range(part))[::-1]:
+            section = row[:-i] if i != 0 else row
+            ns.append(min(n for n, a in enumerate(section) if a == max(b for n2, b in enumerate(section) if n2 > max(ns)) and n > max(ns)))
+        t += sum(int(row[i]) * (10**n) for n, i in enumerate(ns[1:][::-1]))
 
-total1 = sum(int(get_max(row, 1)[::-1]) for row in l)
-total2 = sum(int(get_max(row, 11)[::-1]) for row in l)
-
-print(total1, total2)
+    print(t)
