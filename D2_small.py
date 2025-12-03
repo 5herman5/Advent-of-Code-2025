@@ -1,0 +1,1 @@
+print(", ".join(str(sum([i for line in open("inp.txt", "r").read().split(",") for i in range(int(line.split("-")[0]), int(line.split("-")[1]) + 1) if any(len(set([str(i)[n * ind : n * (ind + 1)] for ind in range(len(str(i)) // n)])) == 1 for n in range(1, len(str(i))) if len(str(i)) % n == 0 and len(str(i)) // n in l)])) for l in ([2], range(100))))
